@@ -1,6 +1,7 @@
 # Ceviche DB Sync Operator
 A Kubernetes operator to automate PostgreSQL database dumps and sync with Git repositories.
 
+![CevicheDBSync Logo](docs/images/Leonardo_Phoenix_10_A_sleek_highcontrast_black_and_white_minim_0.jpg)
 
 ## Description
 The Ceviche Database Sync Operator watches PostgreSQL StatefulSets in Kubernetes and automatically creates, manages, and synchronizes database dumps to Git repositories. This enables easy backup, versioning, and recovery of database content.
