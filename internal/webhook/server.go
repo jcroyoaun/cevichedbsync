@@ -63,10 +63,12 @@ func (s *WebhookServer) handleDumpRequest(w http.ResponseWriter, r *http.Request
 
 	// Return success
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{
+	if err := json.NewEncoder(w).Encode(map[string]string{
 		"status":  "success",
 		"message": fmt.Sprintf("Database dump for %s/%s triggered", namespace, name),
-	})
+	}); err != nil {
+		logger.Error(err, "Failed to encode JSON response")
+	}
 }
 
 // triggerDatabaseDump triggers an on-demand database dump

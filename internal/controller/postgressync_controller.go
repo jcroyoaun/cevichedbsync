@@ -178,7 +178,12 @@ func (r *PostgresSyncReconciler) findAndRestoreDump(ctx context.Context, pgSync 
 		logger.Error(err, "failed to clone Git repository")
 		return false, fmt.Errorf("failed to clone Git repository: %w", err)
 	}
-	defer os.RemoveAll(repoDir)
+
+	defer func() {
+		if err := os.RemoveAll(repoDir); err != nil {
+			logger.Error(err, "Failed to remove repo directory")
+		}
+	}()
 
 	// Determine dump directory path based on GitOutputPath
 	dumpDir := "dumps" // Default path
@@ -333,7 +338,12 @@ func (r *PostgresSyncReconciler) createDatabaseDump(ctx context.Context, pgSync 
 		logger.Error(err, "failed to clone Git repository")
 		return fmt.Errorf("failed to clone Git repository: %w", err)
 	}
-	defer os.RemoveAll(repoDir)
+
+	defer func() {
+		if err := os.RemoveAll(repoDir); err != nil {
+			logger.Error(err, "Failed to remove repo directory")
+		}
+	}()
 
 	// Determine dump directory path based on GitOutputPath
 	dumpDir := "dumps" // Default path
@@ -398,8 +408,11 @@ func (r *PostgresSyncReconciler) cloneRepository(repoURL, username, password str
 			Password: password,
 		},
 	})
+
 	if err != nil {
-		os.RemoveAll(tempDir)
+		if errRemove := os.RemoveAll(tempDir); errRemove != nil {
+			_ = errRemove
+		}
 		return "", fmt.Errorf("failed to clone repository: %w", err)
 	}
 

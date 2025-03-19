@@ -66,11 +66,11 @@ type PostgresSyncStatus struct {
 	LastSyncTime metav1.Time `json:"lastSyncTime,omitempty"`
 }
 
-//+kubebuilder:object:root=true
-//+kubebuilder:subresource:status
-//+kubebuilder:printcolumn:name="Phase",type="string",JSONPath=".status.phase"
-//+kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.message"
-//+kubebuilder:printcolumn:name="Last Sync",type="date",JSONPath=".status.lastSyncTime"
+// +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:printcolumn:name="Phase",type="string",JSONPath=".status.phase"
+// +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.message"
+// +kubebuilder:printcolumn:name="Last Sync",type="date",JSONPath=".status.lastSyncTime"
 
 // PostgresSync is the Schema for the postgressyncs API
 type PostgresSync struct {
@@ -81,7 +81,7 @@ type PostgresSync struct {
 	Status PostgresSyncStatus `json:"status,omitempty"`
 }
 
-//+kubebuilder:object:root=true
+// +kubebuilder:object:root=true
 
 // PostgresSyncList contains a list of PostgresSync
 type PostgresSyncList struct {
