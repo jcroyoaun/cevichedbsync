@@ -1,0 +1,18 @@
+apiVersion: ceviche.jcroyoaun.io/v1alpha1
+kind: PostgresSync
+metadata:
+  name: sample-postgres-migration
+  namespace: postgres
+  annotations:
+    example.com/dump: "true"
+spec:
+  repositoryURL: "https://github.com/jcroyoaun/liftnotebook.git"
+  migrationsPath: "db/migrations"
+  gitCredentials:
+    secretName: git-credentials
+  databaseCredentials:
+    secretName: postgres-credentials
+  statefulSetRef:
+    name: postgres
+  generateMigrationsOnShutdown: true
+  dumpOnWebhook: true

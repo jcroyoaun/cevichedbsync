@@ -1,0 +1,48 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ceviche.jcroyoaun.io
+  resources:
+  - postgressyncs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ceviche.jcroyoaun.io
+  resources:
+  - postgressyncs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ceviche.jcroyoaun.io
+  resources:
+  - postgressyncs/status
+  verbs:
+  - get
+  - patch
+  - update
