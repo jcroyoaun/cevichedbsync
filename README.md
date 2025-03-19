@@ -117,7 +117,10 @@ curl -X POST http://<operator-service>:8082/dump/postgres/sample-postgres-sync
 
 ```
 
-NOTE: In need of port-forwarding pod directly to hit endpoint
+NOTE: In need of port-forwarding pod directly to hit endpoint, ie:
+```bash
+kubectl port-forward cevichedbsync-operator-controller-manager-6d96687855-hjgjw 8082:8082 -n cevichedbsync
+```
 
 ## Contributing
 Send me a DM on x.com/@jcroyoaun
